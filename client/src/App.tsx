@@ -1,2 +1,8 @@
 import React from "react";
-export const App = () => <>Blog App</>;
+import PostCreate from "./Modules/Posts/PostCreate";
+export const App = () => (
+  <div className="container">
+    <h1>Create Post</h1>
+    <PostCreate></PostCreate>
+  </div>
+);
