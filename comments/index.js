@@ -2,8 +2,13 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const { randomBytes } = require("crypto");
+const cors = require("cors");
+
 app.use(bodyParser.json());
+app.use(cors());
+
 const commentsByPostId = {};
+
 app.get("/posts/:id/comments", (req, res) => {
   res.status(200).send(commentsByPostId[req.params.id] || []);
 });
