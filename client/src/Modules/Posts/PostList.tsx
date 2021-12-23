@@ -10,7 +10,7 @@ const PostList = () => {
   }, []);
 
   const fetchPosts = async () => {
-    const { data } = await axios.get("http://localhost:4000/posts");
+    const { data } = await axios.get("http://localhost:4002/posts");
     setPosts(data);
   };
   const renderedPosts = Object.values(posts).map((post: any) => {
@@ -23,9 +23,11 @@ const PostList = () => {
         }}
         key={post.id}
       >
-        <div className="card-title text-capitalize">{post.title}</div>
+        <div className="card-title text-capitalize">
+          <h4>{post.title}</h4>
+        </div>
+        <CommentsList comments={post.comments}></CommentsList>
         <CommentCreate postId={post.id}></CommentCreate>
-        <CommentsList postId={post.id}></CommentsList>
       </div>
     );
   });
