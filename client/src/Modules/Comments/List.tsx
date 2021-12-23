@@ -6,20 +6,20 @@ export interface CommentsListProps {
 }
 const CommentsList: FC<CommentsListProps> = ({ postId }) => {
   const [commentsList, setCommentsList] = useState([]);
-  useEffect(() => {
-    fetchComments();
-  }, []);
+
   const renderComments = commentsList.map((comment: any) => (
     <Comment key={comment.id} content={comment.content}></Comment>
   ));
 
-  const fetchComments = async () => {
-    const { data } = await axios.get(
-      `http://localhost:4001/posts/${postId}/comments`
-    );
-    setCommentsList(data);
-  };
-
+  useEffect(() => {
+    const fetchComments = async () => {
+      const { data } = await axios.get(
+        `http://localhost:4001/posts/${postId}/comments`
+      );
+      setCommentsList(data);
+    };
+    fetchComments();
+  }, [postId]);
   return <div>{renderComments}</div>;
 };
 
